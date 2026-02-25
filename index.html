@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Remark Tampos</title>
+    <style>
+        /* ---------- LIGHT GRAY THEME · CLEAN STARTER PORTFOLIO ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e5e7eb;  /* soft gray base */
+            background-image: radial-gradient(circle at 20% 30%, #d1d5db 0%, #f3f4f6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 1rem;
+            position: relative;
+        }
+
+        /* very subtle pattern (barely visible, adds depth) */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.03"><path d="M20 20 L180 20 M20 60 L180 60 M20 100 L180 100 M20 140 L180 140 M20 180 L180 180 M20 20 L20 180 M60 20 L60 180 M100 20 L100 180 M140 20 L140 180 M180 20 L180 180" stroke="%234b5563" stroke-width="1.5" fill="none"/></svg>');
+            background-size: 160px 160px;
+            pointer-events: none;
+        }
+
+        /* main card – soft light gray with warm sand details */
+        .landing {
+            max-width: 1300px;
+            width: 100%;
+            background: #f9fafb;   /* very light gray */
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.25), 0 10px 20px -5px rgba(0,0,0,0.2);
+            border-radius: 38px;
+            padding: 2.2rem 2rem;
+            position: relative;
+            border: 1px solid #d4a5a5;  /* warm taupe */
+        }
+
+        /* accent line – toned down for light theme */
+        .landing::after {
+            content: "";
+            position: absolute;
+            bottom: 20px;
+            right: 32px;
+            width: 130px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #a78b7a, #4b5563);
+            border-radius: 4px;
+            opacity: 0.3;
+        }
+
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+        }
+
+        .card {
+            background: #ffffff;   /* clean white cards on light gray background */
+            border: 1px solid #d6d3d0;  /* warm gray border */
+            border-radius: 32px;
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.1), 0 4px 8px -4px rgba(0,0,0,0.05);
+            padding: 1.8rem 1.5rem;
+            color: #1f2937;
+            transition: 0.2s;
+            word-wrap: break-word;
+            animation: cardFadeUp 0.5s forwards;
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .resume-grid .card:nth-child(1) { animation-delay: 0.05s; }
+        .resume-grid .card:nth-child(2) { animation-delay: 0.1s; }
+        .resume-grid .card:nth-child(3) { animation-delay: 0.15s; }
+        .resume-grid .card:nth-child(4) { animation-delay: 0.2s; }
+        .resume-grid .card:nth-child(5) { animation-delay: 0.25s; }
+        .resume-grid .card:nth-child(6) { animation-delay: 0.3s; }
+        .resume-grid .card:nth-child(7) { animation-delay: 0.35s; }
+
+        @keyframes cardFadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .card:hover {
+            border-color: #9ca3af;
+            box-shadow: 0 20px 28px -12px rgba(0,0,0,0.25), 0 0 0 2px #cbb5a5 inset;
+            background: #ffffff;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 650;
+            color: #1f2937;
+            border-bottom: 3px solid #bba28e;  /* warm sand */
+            padding-bottom: 12px;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2::before {
+            content: "▌";
+            color: #4b5563;
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        /* ---------- FIXED AVATAR: IMAGE WITHOUT BREAKING ---------- */
+        .avatar-img {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            border: 4px solid #9ca3af;    /* gray border */
+            box-shadow: 0 12px 25px -10px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            overflow: hidden;              /* keeps image inside circle */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .avatar-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;              /* makes image fill circle without distortion */
+            display: block;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 18px 30px -8px rgba(0,0,0,0.25), 0 0 0 4px #bba28e;
+            border-color: #bba28e;
+        }
+
+        .detail-item {
+            font-size: 1.2rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: #f9fafb;
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            border: 1.5px solid #d6d3d0;
+            box-shadow: 0 4px 8px -4px rgba(0,0,0,0.05);
+            word-break: break-word;
+            flex-wrap: wrap;
+            color: #1f2937;
+            font-weight: 450;
+        }
+
+        .skill-chip {
+            background: #ffffff;
+            border: 2px solid #4b5563;      /* dark gray */
+            color: #1f2937;
+            padding: 0.7rem 1.8rem;
+            font-size: 1.1rem;
+            margin: 0.3rem;
+            display: inline-block;
+            border-radius: 40px;
+            box-shadow: 0 5px 0 #9ca3af;     /* lighter gray shadow */
+            font-weight: 600;
+            transition: 0.1s;
+        }
+
+        .skill-chip.basic {
+            border-color: #bba28e;            /* warm sand */
+            background: #f5f0eb;
+            color: #1f2937;
+            box-shadow: 0 5px 0 #9b8b7a;
+        }
+
+        .skill-chip:hover {
+            background: #bba28e;
+            color: #ffffff;
+            border-color: #4b5563;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #4b5563;
+        }
+
+        /* grid spans */
+        @media (min-width: 600px) {
+            .resume-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .span-2 {
+                grid-column: span 2;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .resume-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* scrollbar – matches light theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #e5e7eb;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#bba28e, #6b7280);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 450px) {
+            .landing {
+                padding: 1.5rem 1rem;
+            }
+            .card h2 {
+                font-size: 1.8rem;
+            }
+            .avatar-img {
+                width: 140px; height: 140px;
+            }
+        }
+
+        /* remove any leftover */
+        .hero, #welcomeBlock {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="landing">
+    <div id="resumeGrid" class="resume-grid">
+        <!-- CARD 1: profile avatar – YOUR IMAGE (pic.jpg) now fits perfectly, circle intact -->
+        <div class="card" style="display: flex; justify-content: center; align-items: center;">
+            <div class="avatar-img">
+                <img src="./pic.jpg" alt="Remark Tampos">
+            </div>
+        </div>
+
+        <!-- CARD 2: name + starter title (span-2) -->
+        <div class="card span-2">
+            <h2>REMARK TAMPOS</h2>
+            <div style="font-size: 2rem; font-weight: 600; background: #4b5563; color: #f5f0eb; display: inline-block; padding: 0.4rem 1.8rem; border-radius: 60px; letter-spacing: 0.5px;">
+                STARTER DEVELOPER
+            </div>
+            <div style="font-size: 1.4rem; color: #374151; margin-top: 0.8rem; display: flex; gap: 1.2rem; flex-wrap: wrap;">
+                <span>🌱 first portfolio</span>
+                <span>⚡ learning · building</span>
+            </div>
+        </div>
+
+        <!-- CARD 3: contact (email: remarktampos@gmail.com) -->
+        <div class="card">
+            <h2>📬 CONTACT</h2>
+            <div class="detail-item">✉ remarktampos@gmail.com</div>
+            <div class="detail-item">🌐 github.com/remark-starter</div>
+            <div class="detail-item">📍 Cebu City, PH</div>
+        </div>
+
+        <!-- CARD 4: education background (basic IT) -->
+        <div class="card">
+            <h2>📘 EDUCATION</h2>
+            <div class="detail-item" style="flex-direction: column; align-items: start; gap:6px;">     
+                <span style="font-size:1.3rem; color:#1f2937;">BS Information Technology</span>
+                <span>Madridejos Community College</span>   
+            </div>
+            <div class="detail-item" style="margin-top: 0.6rem;">
+                <span>➕ starting web / frontend basics</span>
+            </div>
+        </div>
+
+        <!-- CARD 5: technical skills – basic HTML + CSS + starter tools -->
+        <div class="card span-2">
+            <h2>🧩 SKILLS (BASIC)</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="skill-chip basic">HTML5</span>
+                <span class="skill-chip basic">CSS3</span>
+                <span class="skill-chip basic">responsive design</span>                
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span class="skill-chip">Git / GitHub</span>
+                <span class="skill-chip basic">VS Code</span>
+                <span class="skill-chip basic">command line</span>
+            </div>
+            <div style="margin-top: 1.2rem; font-size: 1.15rem; color:#374151;">➕ keen to learn JavaScript, frameworks, and more</div>
+        </div>
+
+        <!-- CARD 6: languages & soft skills -->
+        <div class="card">
+            <h2>🗣️ LANGUAGES</h2>
+            <div class="detail-item">🔹 English (conversational)</div>
+            <div class="detail-item">🔹 Filipino (native)</div>
+            <div class="detail-item">🔹 Cebuano (native)</div>
+        </div>
+
+        <!-- CARD 7: OBJECTIVE – starter dev -->
+        <div class="card span-2">
+            <h2>🎯 STARTER OBJECTIVE</h2>
+            <div style="background: #f5f0eb; padding: 1.8rem; border-left: 8px solid #4b5563; border-radius: 28px; font-size: 1.3rem; line-height: 1.5; color: #1f2937; box-shadow: inset 0 2px 10px rgba(187,162,142,0.2);">
+                Aspiring front‑end / full‑stack developer. I built this portfolio as my first project — it shows my current skills: <strong>HTML & CSS</strong>. I'm eager to grow, contribute, and collaborate. Every expert was once a beginner. Open to junior opportunities, internships, and mentorship.
+            </div>
+        </div>
+    </div>  <!-- close resume-grid -->
+</div>      <!-- close landing -->
+
+</body>
+</html>
